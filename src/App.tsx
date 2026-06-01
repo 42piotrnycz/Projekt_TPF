@@ -1,27 +1,51 @@
-import { useState } from 'react'
-import './App.css'
+import type { ReactNode } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { DashboardPage } from './pages/DashboardPage'
+import { LoginPage } from './pages/auth/LoginPage'
+import { RegisterPage } from './pages/auth/RegisterPage'
+import { WelcomePage } from './pages/auth/WelcomePage'
+import { ROUTES } from './routes'
+import { getSession } from './utils/authStorage'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <h1>Witaj w React!</h1>
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Licznik: {count}
-        </button>
-        <p>
-          Edytuj <code>src/App.tsx</code> i zapisz, aby zobaczyć zmiany
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Kliknij logo Vite'a, aby dowiedzieć się więcej
-      </p>
-    </>
-  )
+function PublicOnly({ children }: { children: ReactNode }) {
+  if (getSession()) {
+    return <Navigate to={ROUTES.dashboard} replace />
+  }
+  return <>{children}</>
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route
+        path={ROUTES.welcome}
+        element={
+          <PublicOnly>
+            <WelcomePage />
+          </PublicOnly>
+        }
+      />
+      <Route
+        path={ROUTES.login}
+        element={
+          <PublicOnly>
+            <LoginPage />
+          </PublicOnly>
+        }
+      />
+      <Route
+        path={ROUTES.register}
+        element={
+          <PublicOnly>
+            <RegisterPage />
+          </PublicOnly>
+        }
+      />
+      <Route element={<ProtectedRoute />}>
+        <Route path={ROUTES.dashboard} element={<DashboardPage />} />
+      </Route>
+      <Route path="*" element={<Navigate to={ROUTES.welcome} replace />} />
+    </Routes>
+  )
+}

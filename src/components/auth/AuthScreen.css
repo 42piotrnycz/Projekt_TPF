@@ -1,0 +1,204 @@
+.auth-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-padding-y) var(--page-padding-x);
+}
+
+.auth-screen__bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, var(--color-bg-glow), transparent 55%),
+    radial-gradient(ellipse 80% 40% at 80% 60%, rgba(34, 211, 238, 0.06), transparent 50%),
+    linear-gradient(180deg, #0c1220 0%, var(--color-bg) 40%, #060910 100%);
+  overflow: hidden;
+}
+
+.auth-screen__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(96, 165, 250, 0.35), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(96, 165, 250, 0.25), transparent),
+    radial-gradient(1px 1px at 80% 20%, rgba(148, 163, 184, 0.3), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(96, 165, 250, 0.2), transparent);
+  opacity: 0.6;
+}
+
+.auth-screen__bg::after {
+  content: '';
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: 35%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.15) 20%,
+    rgba(96, 165, 250, 0.35) 50%,
+    rgba(59, 130, 246, 0.15) 80%,
+    transparent
+  );
+  filter: blur(1px);
+  transform: rotate(-2deg);
+}
+
+.auth-screen__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--page-max-width);
+}
+
+.auth-screen__page-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.auth-brand__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-size);
+  height: var(--logo-size);
+  flex-shrink: 0;
+}
+
+.auth-brand__logo svg {
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+}
+
+.auth-brand__logo--bank {
+  border-radius: var(--radius-full);
+  background: var(--color-logo-bank);
+  color: #fff;
+}
+
+.auth-brand__logo--piggy {
+  border-radius: var(--radius-md);
+  background: var(--color-logo-piggy-bg);
+  color: var(--color-logo-piggy-icon);
+}
+
+.auth-brand__title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.auth-brand__tagline {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.auth-card {
+  width: 100%;
+  padding: var(--card-padding);
+  background: var(--color-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.auth-card--glow {
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+}
+
+.auth-card__divider {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-top: 1px solid var(--color-card-border);
+}
+
+.auth-card__footer {
+  margin: 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.auth-card__footer a {
+  color: var(--color-link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card__footer a:hover {
+  text-decoration: underline;
+}
+
+.auth-encrypted-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-body);
+  color: var(--color-text-subtle);
+}
+
+.auth-encrypted-footer svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.auth-trust {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--spacing-xl);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.auth-trust li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-width: 4.5rem;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: var(--line-height-body);
+  color: var(--color-text-subtle);
+  text-align: center;
+}
+
+.auth-trust__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-trust);
+}
+
+.auth-trust__icon svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}

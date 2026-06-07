@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { AppShell } from './components/layout/AppShell'
+import { AddSubscriptionPage } from './pages/AddSubscriptionPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { SubscriptionsPage } from './pages/SubscriptionsPage'
 import { LoginPage } from './pages/auth/LoginPage'
 import { RegisterPage } from './pages/auth/RegisterPage'
 import { WelcomePage } from './pages/auth/WelcomePage'
@@ -43,7 +46,12 @@ export default function App() {
         }
       />
       <Route element={<ProtectedRoute />}>
-        <Route path={ROUTES.dashboard} element={<DashboardPage />} />
+        <Route element={<AppShell />}>
+          <Route index element={<Navigate to={ROUTES.dashboard} replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="subscriptions" element={<SubscriptionsPage />} />
+          <Route path="subscriptions/new" element={<AddSubscriptionPage />} />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.welcome} replace />} />
     </Routes>

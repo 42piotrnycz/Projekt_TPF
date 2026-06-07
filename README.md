@@ -45,4 +45,8 @@ Możesz też założyć własne konto przez `/register`.
 | `/` | Ekran powitalny |
 | `/login` | Logowanie |
 | `/register` | Rejestracja |
-| `/dashboard` | Panel (chroniony, po zalogowaniu) |
+| `/dashboard` | Dashboard subskrypcji |
+| `/subscriptions` | Moje subskrypcje |
+| `/subscriptions/new` | Dodaj subskrypcję |
+
+Po zalogowaniu dane demo subskrypcji ładują się automatycznie do `localStorage`.

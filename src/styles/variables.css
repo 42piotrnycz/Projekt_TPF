@@ -26,8 +26,18 @@
   --color-logo-piggy-icon: #1e3a5f;
 
   --color-trust: #34d399;
+  --color-success: #22c55e;
+  --color-warning: #f43f5e;
   --color-error: #f87171;
   --color-error-soft: rgba(248, 113, 113, 0.12);
+
+  --color-sidebar: #0d1119;
+  --color-sidebar-active: rgba(59, 130, 246, 0.12);
+  --color-sidebar-border: rgba(148, 163, 184, 0.08);
+  --color-surface-elevated: #1a2234;
+
+  --sidebar-width: 240px;
+  --app-content-padding: var(--spacing-lg);
 
   --gradient-sign-in: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
 

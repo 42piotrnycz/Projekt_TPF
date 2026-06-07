@@ -5,4 +5,5 @@ export const ROUTES = {
   dashboard: '/dashboard',
   subscriptions: '/subscriptions',
   subscriptionsNew: '/subscriptions/new',
+  calendar: '/calendar',
 } as const

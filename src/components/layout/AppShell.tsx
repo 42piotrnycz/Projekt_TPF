@@ -18,7 +18,7 @@ const navItems: {
 }[] = [
   { to: ROUTES.dashboard, label: 'Home', icon: IconHome },
   { to: ROUTES.subscriptions, label: 'Subscriptions', icon: IconLayers },
-  { to: '#', label: 'Calendar', icon: IconCalendar, disabled: true },
+  { to: ROUTES.calendar, label: 'Calendar', icon: IconCalendar },
   { to: '#', label: 'Savings', icon: IconPiggy, disabled: true },
   { to: '#', label: 'Profile', icon: IconUser, disabled: true },
 ]

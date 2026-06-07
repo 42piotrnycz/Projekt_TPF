@@ -1,0 +1,89 @@
+.sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-md);
+}
+
+.sub-row__main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  min-width: 0;
+}
+
+.sub-row__info {
+  min-width: 0;
+}
+
+.sub-row__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.sub-row__name {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.sub-row__meta {
+  margin: var(--spacing-xs) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.sub-row__aside {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.sub-row__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.sub-row__amount {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+}
+
+.sub-row__cycle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+.sub-row__more {
+  display: flex;
+  padding: var(--spacing-xs);
+  border: none;
+  background: transparent;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+}
+
+.sub-row__more svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 640px) {
+  .sub-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sub-row__aside {
+    justify-content: space-between;
+  }
+}

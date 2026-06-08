@@ -21,7 +21,7 @@ const navItems: {
   { to: ROUTES.dashboard, label: 'Home', icon: IconHome },
   { to: ROUTES.subscriptions, label: 'Subscriptions', icon: IconLayers },
   { to: ROUTES.calendar, label: 'Calendar', icon: IconCalendar },
-  { to: '#', label: 'Savings', icon: IconPiggy, disabled: true },
+  { to: ROUTES.savings, label: 'Savings', icon: IconPiggy },
   { to: '#', label: 'Profile', icon: IconUser, disabled: true },
 ]
 

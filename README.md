@@ -1,16 +1,16 @@
 # SaveMammona
 
-Webowa aplikacja do zarządzania wydatkami (React + TypeScript + Vite).
+Webowa aplikacja do zarządzania subskrypcjami i cyklicznymi wydatkami (React + TypeScript + Vite).
 
 ## Wymagania
 
-- Node.js >= 16.x
+- Node.js >= 20.x
 - npm
 
 ## Uruchomienie
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -34,7 +34,7 @@ Przy pierwszym uruchomieniu tworzone jest konto testowe (dane w `localStorage`):
 | E-mail | `demo@savemammona.app` |
 | Hasło | `Demo12345` |
 
-Zaloguj się na `/login` — po sukcesie przekierowanie na `/dashboard`.
+Zaloguj się na `/login` - po sukcesie aplikacja przekieruje Cię na `/dashboard`.
 
 Możesz też założyć własne konto przez `/register`.
 
@@ -48,5 +48,7 @@ Możesz też założyć własne konto przez `/register`.
 | `/dashboard` | Dashboard subskrypcji |
 | `/subscriptions` | Moje subskrypcje |
 | `/subscriptions/new` | Dodaj subskrypcję |
+| `/calendar` | Kalendarz płatności |
+| `/savings` | Symulacja oszczędności z dynamicznym wykresem |
 
 Po zalogowaniu dane demo subskrypcji ładują się automatycznie do `localStorage`.

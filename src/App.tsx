@@ -5,6 +5,7 @@ import { AppShell } from './components/layout/AppShell'
 import { AddSubscriptionPage } from './pages/AddSubscriptionPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { SavingsPage } from './pages/SavingsPage'
 import { SubscriptionsPage } from './pages/SubscriptionsPage'
 import { LoginPage } from './pages/auth/LoginPage'
 import { RegisterPage } from './pages/auth/RegisterPage'
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="subscriptions" element={<SubscriptionsPage />} />
           <Route path="subscriptions/new" element={<AddSubscriptionPage />} />
           <Route path="calendar" element={<CalendarPage />} />
+          <Route path="savings" element={<SavingsPage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.welcome} replace />} />

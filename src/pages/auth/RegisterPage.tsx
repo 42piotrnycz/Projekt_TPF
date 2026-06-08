@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { AuthFormError } from '../../components/auth/AuthFormError'
 import {
   AuthBrand,
@@ -10,7 +11,8 @@ import {
 } from '../../components/auth/AuthScreen'
 import { AuthTextField } from '../../components/auth/AuthTextField'
 import { ROUTES } from '../../routes'
-import { registerAndLogin } from '../../utils/authStorage'
+import { auth } from '../../lib/firebase'
+import { firebaseErrorMessage } from '../../utils/firebaseErrors'
 import { isValidEmail, MIN_PASSWORD_LENGTH } from '../../utils/validation'
 import './AuthForm.css'
 
@@ -38,21 +40,22 @@ export function RegisterPage() {
     return Object.keys(errors).length === 0
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setFormError('')
     if (!validate()) return
 
     setLoading(true)
-    const result = registerAndLogin(name, email, password)
-    setLoading(false)
-
-    if (!result.ok) {
-      setFormError(result.error)
-      return
+    try {
+      const credential = await createUserWithEmailAndPassword(auth, email.trim(), password)
+      await updateProfile(credential.user, { displayName: name.trim() })
+      navigate(ROUTES.dashboard, { replace: true })
+    } catch (err: unknown) {
+      const code = (err as { code?: string }).code ?? ''
+      setFormError(firebaseErrorMessage(code))
+    } finally {
+      setLoading(false)
     }
-
-    navigate(ROUTES.dashboard, { replace: true })
   }
 
   return (

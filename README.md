@@ -50,5 +50,6 @@ Możesz też założyć własne konto przez `/register`.
 | `/subscriptions/new` | Dodaj subskrypcję |
 | `/calendar` | Kalendarz płatności |
 | `/savings` | Symulacja oszczędności z dynamicznym wykresem |
+| `/profile` | Profil użytkownika i ustawienia konta |
 
 Po zalogowaniu dane demo subskrypcji ładują się automatycznie do `localStorage`.

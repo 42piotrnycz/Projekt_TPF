@@ -1,4 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
 import {
   IconCalendar,
   IconHome,
@@ -7,7 +8,8 @@ import {
   IconUser,
 } from '../icons/AppIcons'
 import { ROUTES } from '../../routes'
-import { getSession, logout } from '../../utils/authStorage'
+import { auth } from '../../lib/firebase'
+import { useAuth } from '../../context/AuthContext'
 import './AppShell.css'
 
 const navItems: {
@@ -25,10 +27,13 @@ const navItems: {
 
 export function AppShell() {
   const navigate = useNavigate()
-  const session = getSession()
+  const { user } = useAuth()
 
-  function handleLogout() {
-    logout()
+  const displayName = user?.displayName ?? user?.email ?? 'User'
+  const avatarLetter = displayName.charAt(0).toUpperCase()
+
+  async function handleLogout() {
+    await signOut(auth)
     navigate(ROUTES.welcome, { replace: true })
   }
 
@@ -65,10 +70,10 @@ export function AppShell() {
 
         <div className="app-shell__user">
           <div className="app-shell__avatar" aria-hidden>
-            {(session?.name ?? 'U').charAt(0).toUpperCase()}
+            {avatarLetter}
           </div>
           <div className="app-shell__user-info">
-            <span className="app-shell__user-name">{session?.name ?? 'User'}</span>
+            <span className="app-shell__user-name">{displayName}</span>
             <span className="app-shell__user-plan">Pro Plan</span>
           </div>
           <button type="button" className="app-shell__logout" onClick={handleLogout}>

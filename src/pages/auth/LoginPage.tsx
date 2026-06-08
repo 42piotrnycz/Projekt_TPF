@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { AuthFormError } from '../../components/auth/AuthFormError'
 import {
   AuthBrand,
@@ -12,11 +13,9 @@ import {
 import { AuthTextField } from '../../components/auth/AuthTextField'
 import { IconArrowRight } from '../../components/icons/AuthIcons'
 import { ROUTES } from '../../routes'
-import {
-  getRememberedEmail,
-  loginUser,
-  setRememberedEmail,
-} from '../../utils/authStorage'
+import { auth } from '../../lib/firebase'
+import { getRememberedEmail, setRememberedEmail } from '../../utils/authStorage'
+import { firebaseErrorMessage } from '../../utils/firebaseErrors'
 import './AuthForm.css'
 
 export function LoginPage() {
@@ -44,22 +43,22 @@ export function LoginPage() {
     return Object.keys(errors).length === 0
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setFormError('')
     if (!validate()) return
 
     setLoading(true)
-    const result = loginUser(email, password)
-    setLoading(false)
-
-    if (!result.ok) {
-      setFormError(result.error)
-      return
+    try {
+      await signInWithEmailAndPassword(auth, email.trim(), password)
+      setRememberedEmail(remember ? email.trim() : null)
+      navigate(ROUTES.dashboard, { replace: true })
+    } catch (err: unknown) {
+      const code = (err as { code?: string }).code ?? ''
+      setFormError(firebaseErrorMessage(code))
+    } finally {
+      setLoading(false)
     }
-
-    setRememberedEmail(remember ? email.trim() : null)
-    navigate(ROUTES.dashboard, { replace: true })
   }
 
   return (

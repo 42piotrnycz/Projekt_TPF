@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { AppShell } from './components/layout/AppShell'
+import { useAuth } from './context/AuthContext'
 import { AddSubscriptionPage } from './pages/AddSubscriptionPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { DashboardPage } from './pages/DashboardPage'
@@ -10,12 +11,11 @@ import { LoginPage } from './pages/auth/LoginPage'
 import { RegisterPage } from './pages/auth/RegisterPage'
 import { WelcomePage } from './pages/auth/WelcomePage'
 import { ROUTES } from './routes'
-import { getSession } from './utils/authStorage'
 
 function PublicOnly({ children }: { children: ReactNode }) {
-  if (getSession()) {
-    return <Navigate to={ROUTES.dashboard} replace />
-  }
+  const { user, loading } = useAuth()
+  if (loading) return null
+  if (user) return <Navigate to={ROUTES.dashboard} replace />
   return <>{children}</>
 }
 

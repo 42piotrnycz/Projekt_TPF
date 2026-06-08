@@ -7,4 +7,5 @@ export const ROUTES = {
   subscriptionsNew: '/subscriptions/new',
   calendar: '/calendar',
   savings: '/savings',
+  profile: '/profile',
 } as const

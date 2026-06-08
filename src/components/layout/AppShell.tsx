@@ -22,7 +22,7 @@ const navItems: {
   { to: ROUTES.subscriptions, label: 'Subscriptions', icon: IconLayers },
   { to: ROUTES.calendar, label: 'Calendar', icon: IconCalendar },
   { to: ROUTES.savings, label: 'Savings', icon: IconPiggy },
-  { to: '#', label: 'Profile', icon: IconUser, disabled: true },
+  { to: ROUTES.profile, label: 'Profile', icon: IconUser },
 ]
 
 export function AppShell() {

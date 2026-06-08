@@ -6,6 +6,7 @@ import { useAuth } from './context/AuthContext'
 import { AddSubscriptionPage } from './pages/AddSubscriptionPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { SavingsPage } from './pages/SavingsPage'
 import { SubscriptionsPage } from './pages/SubscriptionsPage'
 import { LoginPage } from './pages/auth/LoginPage'
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="subscriptions/new" element={<AddSubscriptionPage />} />
           <Route path="calendar" element={<CalendarPage />} />
           <Route path="savings" element={<SavingsPage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.welcome} replace />} />

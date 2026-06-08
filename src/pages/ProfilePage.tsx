@@ -2,7 +2,7 @@ import {
   IconCheck,
   IconUser,
 } from '../components/icons/AppIcons'
-import { getSession } from '../utils/authStorage'
+import { useAuth } from '../context/AuthContext'
 import './ProfilePage.css'
 
 type SecurityAction = {
@@ -31,11 +31,8 @@ const PREFERENCES: Preference[] = [
 ]
 
 export function ProfilePage() {
-  const session = getSession()
-  const profileName =
-    session?.name === 'Demo User'
-      ? 'Alexander Wright'
-      : session?.name ?? 'Alexander Wright'
+  const { user } = useAuth()
+  const profileName = user?.displayName ?? 'Alexander Wright'
 
   return (
     <div className="profile-page">

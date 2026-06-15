@@ -59,3 +59,6 @@ AGENT_CONTEXT.md
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# Firebase Hosting cache
+.firebase/

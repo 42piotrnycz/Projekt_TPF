@@ -75,6 +75,7 @@ export function AddSubscriptionPage() {
       renewalDate,
       status: 'active',
       autoPay,
+      recurring: true,
       iconColor: CATEGORY_COLORS[category],
     })
 

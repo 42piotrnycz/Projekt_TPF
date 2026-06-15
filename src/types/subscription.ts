@@ -18,7 +18,6 @@ export interface Subscription {
   renewalDate: string
   status: SubscriptionStatus
   autoPay: boolean
-  recurring: boolean
   iconColor: string
   trialEndsAt?: string
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <rect x="0" y="0" width="1280" height="56" fill="#1a73e8"/>
+  <text x="24" y="36" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Google Analytics 4</text>
+  <rect x="40" y="90" width="280" height="120" rx="8" fill="#fff" stroke="#e2e8f0"/>
+  <rect x="340" y="90" width="280" height="120" rx="8" fill="#fff" stroke="#e2e8f0"/>
+  <rect x="640" y="90" width="280" height="120" rx="8" fill="#fff" stroke="#e2e8f0"/>
+  <rect x="40" y="240" width="1200" height="420" rx="8" fill="#fff" stroke="#e2e8f0"/>
+  <text x="640" y="380" fill="#64748b" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">GA4  panel raport�w (u|ytkownicy, sesje, zdarzenia)</text>
+</svg>

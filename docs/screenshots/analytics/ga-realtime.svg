@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <rect x="0" y="0" width="1280" height="56" fill="#1a73e8"/>
+  <text x="24" y="36" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Google Analytics 4  Realtime</text>
+  <circle cx="200" cy="280" r="60" fill="#22c55e" opacity="0.2"/>
+  <text x="200" y="290" fill="#166534" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" font-weight="bold">3</text>
+  <text x="200" y="360" fill="#64748b" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">aktywni u|ytkownicy</text>
+  <text x="640" y="500" fill="#64748b" font-family="Arial, sans-serif" font-size="20" text-anchor="middle">Ruch na |ywo po wdro|eniu aplikacji</text>
+</svg>

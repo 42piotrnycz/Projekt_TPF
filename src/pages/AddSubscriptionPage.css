@@ -5,6 +5,21 @@
   max-width: 480px;
 }
 
+.add-sub__form--compact {
+  max-width: none;
+}
+
+.add-sub__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.add-sub__actions .add-sub__submit {
+  margin-top: 0;
+}
+
 .add-sub__field {
   display: flex;
   flex-direction: column;

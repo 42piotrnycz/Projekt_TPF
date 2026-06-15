@@ -16,6 +16,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(1),
     status: 'active',
     autoPay: true,
+    recurring: true,
     iconColor: '#22c55e',
   },
   {
@@ -25,6 +26,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(3),
     status: 'active',
     autoPay: true,
+    recurring: true,
     iconColor: '#60a5fa',
   },
   {
@@ -34,6 +36,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(5),
     status: 'active',
     autoPay: true,
+    recurring: true,
     iconColor: '#10b981',
   },
   {
@@ -43,6 +46,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(2),
     status: 'active',
     autoPay: false,
+    recurring: true,
     iconColor: '#ef4444',
     trialEndsAt: addDays(2),
   },
@@ -53,6 +57,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(12),
     status: 'active',
     autoPay: true,
+    recurring: true,
     iconColor: '#f97316',
   },
   {
@@ -62,16 +67,25 @@ const SEED: Omit<Subscription, 'id'>[] = [
     renewalDate: addDays(20),
     status: 'paused',
     autoPay: false,
+    recurring: true,
     iconColor: '#8b5cf6',
   },
 ]
+
+function normalizeSubscription(raw: Subscription): Subscription {
+  return {
+    ...raw,
+    recurring: raw.recurring ?? true,
+  }
+}
 
 function readAll(): Subscription[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed: unknown = JSON.parse(raw)
-    return Array.isArray(parsed) ? (parsed as Subscription[]) : []
+    if (!Array.isArray(parsed)) return []
+    return (parsed as Subscription[]).map(normalizeSubscription)
   } catch {
     return []
   }

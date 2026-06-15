@@ -1,6 +1,7 @@
 .app-shell {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: var(--color-bg);
   color: var(--color-text);
 }
@@ -10,9 +11,11 @@
   flex-direction: column;
   width: var(--sidebar-width);
   flex-shrink: 0;
+  height: 100vh;
   padding: var(--spacing-lg) var(--spacing-md);
   background: var(--color-sidebar);
   border-right: 1px solid var(--color-sidebar-border);
+  overflow-y: auto;
 }
 
 .app-shell__brand {
@@ -130,22 +133,28 @@
 .app-shell__content {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   padding: var(--app-content-padding);
   overflow-y: auto;
 }
 
 @media (max-width: 768px) {
   .app-shell {
+    height: 100vh;
     flex-direction: column;
   }
 
   .app-shell__sidebar {
     width: 100%;
+    height: auto;
+    max-height: none;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
+    flex-shrink: 0;
+    overflow-y: visible;
   }
 
   .app-shell__brand {

@@ -232,24 +232,6 @@ Monitorowanie aktywnych użytkowników na żywo po publikacji aplikacji.
 
 ---
 
-## Hotjar
-
-Aplikacja integruje **Hotjar / ContentSquare** poprzez skrypt wczytywany w `<head>` każdej strony (`index.html`). Po wdrożeniu zbierane są nagrania sesji, heatmapy kliknięć oraz dane o zachowaniu użytkowników.
-
-### Nagrania sesji
-
-![Hotjar - nagrania sesji](./docs/screenshots/hotjar/hj-recordings.png)
-
-Lista nagranych sesji użytkowników z datą, czasem trwania i urządzeniem.
-
-### Heatmapa kliknięć
-
-![Hotjar - heatmapa](./docs/screenshots/hotjar/hj-heatmap.png)
-
-Wizualizacja obszarów najczęściej klikanych przez użytkowników.
-
----
-
 ## Komendy npm
 
 | Komenda | Opis |

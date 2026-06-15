@@ -219,13 +219,13 @@ Aplikacja jest przygotowana do integracji z **Google Analytics 4** poprzez Fireb
 
 ### Panel raportów GA4
 
-![GA4 - panel raportów](./docs/screenshots/analytics/ga-dashboard.png)
+![GA4 - panel raportów](./docs/screenshots/app/ga-dashboard.png)
 
 Przegląd użytkowników, sesji i kluczowych metryk za wybrany okres.
 
 ### Ruch w czasie rzeczywistym
 
-![GA4 - realtime](./docs/screenshots/analytics/ga-realtime.png)
+![GA4 - realtime](./docs/screenshots/app/ga-realtime.png)
 
 Monitorowanie aktywnych użytkowników na żywo po publikacji aplikacji.
 

@@ -55,6 +55,7 @@ export function AddSubscriptionForm({
     create({
       name: name.trim(),
       amount: Number(amount),
+      billingCycle: 'monthly',
       category,
       renewalDate,
       status: 'active',

@@ -219,49 +219,34 @@ Aplikacja jest przygotowana do integracji z **Google Analytics 4** poprzez Fireb
 
 ### Panel raportów GA4
 
-![GA4 - panel raportów](./docs/screenshots/analytics/ga-dashboard.svg)
+![GA4 - panel raportów](./docs/screenshots/analytics/ga-dashboard.png)
 
 Przegląd użytkowników, sesji i kluczowych metryk za wybrany okres.
 
-### Zdarzenia (Events)
-
-![GA4 - zdarzenia](./docs/screenshots/analytics/ga-events.svg)
-
-Lista zdarzeń generowanych przez użytkowników (np. `page_view`, `login`, `sign_up`).
-
 ### Ruch w czasie rzeczywistym
 
-![GA4 - realtime](./docs/screenshots/analytics/ga-realtime.svg)
+![GA4 - realtime](./docs/screenshots/analytics/ga-realtime.png)
 
 Monitorowanie aktywnych użytkowników na żywo po publikacji aplikacji.
 
-> **Uwaga:** Zrzuty pochodzą z konsoli [Google Analytics](https://analytics.google.com/) / Firebase Analytics po podłączeniu `MEASUREMENT_ID` i wdrożeniu aplikacji. Zamień pliki w `docs/screenshots/analytics/` na własne screenshoty z produkcji (PNG/JPG).
 
 ---
 
 ## Hotjar
 
-**Hotjar** służy do jakościowego badania zachowania użytkowników - uzupełnia dane ilościowe z Google Analytics o heatmapy kliknięć, nagrania sesji i ankiety satysfakcji.
+Aplikacja integruje **Hotjar / ContentSquare** poprzez skrypt wczytywany w `<head>` każdej strony (`index.html`). Po wdrożeniu zbierane są nagrania sesji, heatmapy kliknięć oraz dane o zachowaniu użytkowników.
 
-Narzędzie konfiguruje się w panelu [hotjar.com](https://www.hotjar.com/) przez dodanie skryptu śledzącego do wdrożonej wersji aplikacji (Site ID). Poniżej przykładowe widoki z panelu Hotjar dla SaveMammona.
+### Nagrania sesji
+
+![Hotjar - nagrania sesji](./docs/screenshots/hotjar/hj-recordings.png)
+
+Lista nagranych sesji użytkowników z datą, czasem trwania i urządzeniem.
 
 ### Heatmapa kliknięć
 
-![Hotjar - heatmapa](./docs/screenshots/hotjar/hotjar-heatmap.svg)
+![Hotjar - heatmapa](./docs/screenshots/hotjar/hj-heatmap.png)
 
-Wizualizacja miejsc, w które użytkownicy najczęściej klikają (np. na Dashboardzie).
-
-### Nagrania sesji (Recordings)
-
-![Hotjar - nagrania](./docs/screenshots/hotjar/hotjar-recordings.svg)
-
-Odtwarzanie ścieżek użytkownika - scroll, kliknięcia, nawigacja między widokami.
-
-### Ankiety i feedback
-
-![Hotjar - ankiety](./docs/screenshots/hotjar/hotjar-surveys.svg)
-
-Zbieranie opinii użytkowników w trakcie korzystania z aplikacji.
+Wizualizacja obszarów najczęściej klikanych przez użytkowników.
 
 ---
 
@@ -280,12 +265,13 @@ Zbieranie opinii użytkowników w trakcie korzystania z aplikacji.
 
 ```bash
 npm run build
-npm run preview
+firebase deploy --only hosting
 ```
 
-Artefakt w katalogu `dist/` można hostować na:
+Aplikacja jest wdrożona na **Firebase Hosting**: [https://savemammona.web.app](https://savemammona.web.app)
 
-- **Firebase Hosting**
+Artefakt w katalogu `dist/` można hostować również na:
+
 - dowolnym serwerze statycznym (Netlify, Vercel, nginx)
 
 Po wdrożeniu:

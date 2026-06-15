@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IconCalendar, IconPlus } from '../components/icons/AppIcons'
-import { CATEGORY_LABELS } from '../types/subscription'
-import type { SubscriptionCategory } from '../types/subscription'
+import { useManualEntries } from '../hooks/useManualEntries'
 import { ROUTES } from '../routes'
 import { useSubscriptions } from '../hooks/useSubscriptions'
+import {
+  CATEGORY_LABELS,
+  type Subscription,
+  type SubscriptionCategory,
+} from '../types/subscription'
+import { MANUAL_ENTRY_LABELS } from '../types/manualEntry'
 import { formatCurrency } from '../utils/formatCurrency'
 import './CalendarPage.css'
 
@@ -13,9 +18,33 @@ const LEGEND = {
   entertainment: { label: 'Entertainment', color: '#ef4444' },
   utilities: { label: 'Utilities', color: '#22c55e' },
   highPriority: { label: 'High Priority', color: '#f97316' },
+  oneTime: { label: 'One-time', color: '#60a5fa' },
 } as const
 
 type LegendKey = keyof typeof LEGEND
+type CalendarPayment =
+  | {
+      id: string
+      type: 'subscription'
+      name: string
+      categoryLabel: string
+      amount: number
+      iconColor: string
+      legendColor: string
+      date: string
+      billingCycle: Subscription['billingCycle']
+    }
+  | {
+      id: string
+      type: 'manual'
+      name: string
+      categoryLabel: string
+      amount: number
+      iconColor: string
+      legendColor: string
+      date: string
+      notes?: string
+    }
 
 function toLegendKey(category: SubscriptionCategory, amount: number): LegendKey {
   if (amount >= 80) return 'highPriority'
@@ -29,6 +58,27 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 const DAY_NAMES = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+
+function parseLocalDate(date: string): Date {
+  return new Date(`${date}T00:00:00`)
+}
+
+function toDateKey(year: number, month: number, day: number): string {
+  const m = String(month + 1).padStart(2, '0')
+  const d = String(day).padStart(2, '0')
+  return `${year}-${m}-${d}`
+}
+
+function getRecurringDay(subscription: Subscription, year: number, month: number): number | null {
+  const start = parseLocalDate(subscription.renewalDate)
+  const daysInViewMonth = new Date(year, month + 1, 0).getDate()
+  const day = Math.min(start.getDate(), daysInViewMonth)
+  const occurrence = new Date(year, month, day)
+
+  if (occurrence < start) return null
+  if (subscription.billingCycle === 'yearly' && month !== start.getMonth()) return null
+  return day
+}
 
 function IconFilter() {
   return (
@@ -55,6 +105,7 @@ function IconEdit() {
 
 export function CalendarPage() {
   const { subscriptions } = useSubscriptions()
+  const { manualEntries } = useManualEntries()
   const today = new Date()
 
   const [viewYear, setViewYear] = useState(today.getFullYear())
@@ -62,16 +113,43 @@ export function CalendarPage() {
   const [selectedDay, setSelectedDay] = useState<number | null>(today.getDate())
 
   const active = subscriptions.filter((s) => s.status === 'active')
+  const dayMap = new Map<number, CalendarPayment[]>()
 
-  const dayMap = new Map<number, typeof active>()
   for (const sub of active) {
-    const d = new Date(sub.renewalDate + 'T00:00:00')
-    if (d.getFullYear() === viewYear && d.getMonth() === viewMonth) {
-      const day = d.getDate()
-      const list = dayMap.get(day) ?? []
-      list.push(sub)
-      dayMap.set(day, list)
-    }
+    const day = getRecurringDay(sub, viewYear, viewMonth)
+    if (!day) continue
+    const list = dayMap.get(day) ?? []
+    list.push({
+      id: `subscription-${sub.id}-${viewYear}-${viewMonth}`,
+      type: 'subscription',
+      name: sub.name,
+      categoryLabel: CATEGORY_LABELS[sub.category],
+      amount: sub.amount,
+      iconColor: sub.iconColor,
+      legendColor: LEGEND[toLegendKey(sub.category, sub.amount)].color,
+      date: toDateKey(viewYear, viewMonth, day),
+      billingCycle: sub.billingCycle,
+    })
+    dayMap.set(day, list)
+  }
+
+  for (const entry of manualEntries) {
+    const date = parseLocalDate(entry.date)
+    if (date.getFullYear() !== viewYear || date.getMonth() !== viewMonth) continue
+    const day = date.getDate()
+    const list = dayMap.get(day) ?? []
+    list.push({
+      id: `manual-${entry.id}`,
+      type: 'manual',
+      name: entry.title,
+      categoryLabel: MANUAL_ENTRY_LABELS[entry.category],
+      amount: entry.amount,
+      iconColor: entry.iconColor,
+      legendColor: LEGEND.oneTime.color,
+      date: entry.date,
+      notes: entry.notes,
+    })
+    dayMap.set(day, list)
   }
 
   const firstDow = new Date(viewYear, viewMonth, 1).getDay()
@@ -96,8 +174,8 @@ export function CalendarPage() {
   const isCurrentMonthView =
     viewYear === today.getFullYear() && viewMonth === today.getMonth()
 
-  const selectedSubs = selectedDay ? (dayMap.get(selectedDay) ?? []) : []
-  const selectedTotal = selectedSubs.reduce((sum, s) => sum + s.amount, 0)
+  const selectedPayments = selectedDay ? (dayMap.get(selectedDay) ?? []) : []
+  const selectedTotal = selectedPayments.reduce((sum, item) => sum + item.amount, 0)
 
   const selectedDateLabel = selectedDay
     ? new Date(viewYear, viewMonth, selectedDay).toLocaleDateString('en-US', {
@@ -119,7 +197,7 @@ export function CalendarPage() {
             <IconFilter />
             Filter
           </button>
-          <Link to={ROUTES.subscriptionsNew} className="app-btn app-btn--primary app-btn--sm">
+          <Link to={ROUTES.calendarNew} className="app-btn app-btn--primary app-btn--sm">
             <IconPlus />
             Add Manual Entry
           </Link>
@@ -166,14 +244,14 @@ export function CalendarPage() {
             {cells.map((day, i) => {
               if (!day) return <div key={`empty-${i}`} className="cal-page__cell cal-page__cell--empty" />
 
-              const subs = dayMap.get(day) ?? []
+              const payments = dayMap.get(day) ?? []
               const isToday = isCurrentMonthView && day === today.getDate()
               const isSelected = day === selectedDay
 
               const seen = new Set<string>()
               const dots: string[] = []
-              for (const sub of subs) {
-                const color = LEGEND[toLegendKey(sub.category, sub.amount)].color
+              for (const payment of payments) {
+                const color = payment.legendColor
                 if (!seen.has(color)) { seen.add(color); dots.push(color) }
                 if (dots.length === 3) break
               }
@@ -190,7 +268,7 @@ export function CalendarPage() {
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === 'Enter' && setSelectedDay(day)}
-                  aria-label={`${day} ${MONTH_NAMES[viewMonth]}${subs.length ? `, ${subs.length} payment${subs.length > 1 ? 's' : ''}` : ''}`}
+                  aria-label={`${day} ${MONTH_NAMES[viewMonth]}${payments.length ? `, ${payments.length} payment${payments.length > 1 ? 's' : ''}` : ''}`}
                   aria-pressed={isSelected}
                 >
                   <span className="cal-page__cell-num">{day}</span>
@@ -220,27 +298,39 @@ export function CalendarPage() {
               <p className="cal-page__total-amount">{formatCurrency(selectedTotal)}</p>
             </div>
 
-            {selectedSubs.length > 0 && (
+            {selectedPayments.length > 0 && (
               <>
                 <p className="cal-page__payments-title">Scheduled Payments</p>
                 <ul className="cal-page__payments-list">
-                  {selectedSubs.map((sub) => (
-                    <li key={sub.id} className="cal-page__payment-item">
+                  {selectedPayments.map((payment) => (
+                    <li
+                      key={payment.id}
+                      className={`cal-page__payment-item cal-page__payment-item--${payment.type}`}
+                    >
                       <div
                         className="service-icon"
-                        style={{ background: sub.iconColor }}
+                        style={{ background: payment.iconColor }}
                         aria-hidden
                       >
-                        {sub.name.charAt(0)}
+                        {payment.name.charAt(0)}
                       </div>
                       <div className="cal-page__payment-body">
-                        <span className="cal-page__payment-name">{sub.name}</span>
+                        <span className="cal-page__payment-name">{payment.name}</span>
                         <span className="cal-page__payment-cat">
-                          {CATEGORY_LABELS[sub.category]}
+                          {payment.categoryLabel}
                         </span>
                       </div>
+                      <span
+                        className={`badge cal-page__payment-kind cal-page__payment-kind--${payment.type}`}
+                      >
+                        {payment.type === 'manual'
+                          ? 'One-time'
+                          : payment.billingCycle === 'yearly'
+                            ? 'Yearly'
+                            : 'Recurring'}
+                      </span>
                       <span className="cal-page__payment-price">
-                        {formatCurrency(sub.amount)}
+                        {formatCurrency(payment.amount)}
                       </span>
                     </li>
                   ))}
@@ -248,7 +338,7 @@ export function CalendarPage() {
               </>
             )}
 
-            {selectedSubs.length === 0 && selectedDay && (
+            {selectedPayments.length === 0 && selectedDay && (
               <p className="cal-page__no-payments">No payments scheduled for this day.</p>
             )}
 

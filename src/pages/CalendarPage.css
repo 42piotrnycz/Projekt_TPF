@@ -231,6 +231,13 @@
   gap: var(--spacing-sm);
 }
 
+.cal-page__payment-item--manual {
+  padding: var(--spacing-sm);
+  border: 1px dashed rgba(96, 165, 250, 0.45);
+  border-radius: var(--radius-sm);
+  background: rgba(96, 165, 250, 0.06);
+}
+
 .cal-page__payment-body {
   flex: 1;
   min-width: 0;
@@ -256,6 +263,21 @@
   font-size: var(--font-size-sm);
   font-weight: 600;
   flex-shrink: 0;
+}
+
+.cal-page__payment-kind {
+  flex-shrink: 0;
+  text-transform: none;
+}
+
+.cal-page__payment-kind--subscription {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--color-accent-light);
+}
+
+.cal-page__payment-kind--manual {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--color-trust);
 }
 
 .cal-page__no-payments {
@@ -298,5 +320,28 @@
 @media (max-width: 1100px) {
   .cal-page__body {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cal-page__header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .cal-page__header-actions .app-btn {
+    flex: 1;
+  }
+
+  .cal-page__cell {
+    min-height: 48px;
+  }
+
+  .cal-page__payment-item {
+    flex-wrap: wrap;
+  }
+
+  .cal-page__payment-price {
+    margin-left: auto;
   }
 }

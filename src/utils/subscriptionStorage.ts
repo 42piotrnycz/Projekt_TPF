@@ -1,4 +1,8 @@
-import type { Subscription, SubscriptionCategory } from '../types/subscription'
+import {
+  getSubscriptionMonthlyAmount,
+  type Subscription,
+  type SubscriptionCategory,
+} from '../types/subscription'
 
 const STORAGE_KEY = 'savemammona_subscriptions'
 
@@ -13,6 +17,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'Spotify Premium',
     category: 'music',
     amount: 19.99,
+    billingCycle: 'monthly',
     renewalDate: addDays(1),
     status: 'active',
     autoPay: true,
@@ -22,6 +27,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'iCloud+',
     category: 'storage',
     amount: 3.99,
+    billingCycle: 'monthly',
     renewalDate: addDays(3),
     status: 'active',
     autoPay: true,
@@ -31,6 +37,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'Local Gym',
     category: 'health',
     amount: 120,
+    billingCycle: 'monthly',
     renewalDate: addDays(5),
     status: 'active',
     autoPay: true,
@@ -40,6 +47,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'Netflix',
     category: 'entertainment',
     amount: 43,
+    billingCycle: 'monthly',
     renewalDate: addDays(2),
     status: 'active',
     autoPay: false,
@@ -50,6 +58,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'Adobe Creative Cloud',
     category: 'software',
     amount: 90,
+    billingCycle: 'monthly',
     renewalDate: addDays(12),
     status: 'active',
     autoPay: true,
@@ -59,6 +68,7 @@ const SEED: Omit<Subscription, 'id'>[] = [
     name: 'Equinox Gym',
     category: 'health',
     amount: 180,
+    billingCycle: 'monthly',
     renewalDate: addDays(20),
     status: 'paused',
     autoPay: false,
@@ -71,7 +81,12 @@ function readAll(): Subscription[] {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return []
     const parsed: unknown = JSON.parse(raw)
-    return Array.isArray(parsed) ? (parsed as Subscription[]) : []
+    return Array.isArray(parsed)
+      ? (parsed as Subscription[]).map((item) => ({
+          ...item,
+          billingCycle: item.billingCycle ?? 'monthly',
+        }))
+      : []
   } catch {
     return []
   }
@@ -113,7 +128,7 @@ export function updateSubscription(
 export function getActiveMonthlyTotal(): number {
   return readAll()
     .filter((s) => s.status === 'active')
-    .reduce((sum, s) => sum + s.amount, 0)
+    .reduce((sum, s) => sum + getSubscriptionMonthlyAmount(s), 0)
 }
 
 export function getUpcoming(days = 7): Subscription[] {
@@ -132,18 +147,21 @@ export function getUpcoming(days = 7): Subscription[] {
 export function getTopExpenses(limit = 3): Subscription[] {
   return [...readAll()]
     .filter((s) => s.status === 'active')
-    .sort((a, b) => b.amount - a.amount)
+    .sort((a, b) => getSubscriptionMonthlyAmount(b) - getSubscriptionMonthlyAmount(a))
     .slice(0, limit)
 }
 
 export function getCategoryBreakdown(): { category: SubscriptionCategory; percent: number }[] {
   const active = readAll().filter((s) => s.status === 'active')
-  const total = active.reduce((sum, s) => sum + s.amount, 0)
+  const total = active.reduce((sum, s) => sum + getSubscriptionMonthlyAmount(s), 0)
   if (total === 0) return []
 
   const sums = new Map<SubscriptionCategory, number>()
   for (const sub of active) {
-    sums.set(sub.category, (sums.get(sub.category) ?? 0) + sub.amount)
+    sums.set(
+      sub.category,
+      (sums.get(sub.category) ?? 0) + getSubscriptionMonthlyAmount(sub),
+    )
   }
 
   return [...sums.entries()]

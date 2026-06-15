@@ -1,6 +1,6 @@
 # SaveMammona
 
-Webowa aplikacja do zarządzania subskrypcjami i cyklicznymi wydatkami (React + TypeScript + Vite).
+Webowa aplikacja do zarządzania subskrypcjami, cyklicznymi płatnościami i jednorazowymi wpisami w kalendarzu płatności (React + TypeScript + Vite).
 
 ## Wymagania
 
@@ -47,9 +47,21 @@ Możesz też założyć własne konto przez `/register`.
 | `/register` | Rejestracja |
 | `/dashboard` | Dashboard subskrypcji |
 | `/subscriptions` | Moje subskrypcje |
-| `/subscriptions/new` | Dodaj subskrypcję |
+| `/subscriptions/new` | Dodaj subskrypcję cykliczną |
 | `/calendar` | Kalendarz płatności |
+| `/calendar/new` | Dodaj jednorazowy wpis do kalendarza |
 | `/savings` | Symulacja oszczędności z dynamicznym wykresem |
 | `/profile` | Profil użytkownika i ustawienia konta |
 
+## Dane lokalne
+
 Po zalogowaniu dane demo subskrypcji ładują się automatycznie do `localStorage`.
+
+Subskrypcje i ręczne wpisy są przechowywane osobno:
+
+| Klucz | Zawartość |
+|-------|-----------|
+| `savemammona_subscriptions` | Subskrypcje cykliczne z cyklem miesięcznym lub rocznym |
+| `savemammona_manual_entries` | Jednorazowe wpisy widoczne wyłącznie w kalendarzu |
+
+Roczne subskrypcje pojawiają się w kalendarzu jako pełna płatność w dniu odnowienia, a w statystykach miesięcznych są przeliczane proporcjonalnie na koszt miesięczny.

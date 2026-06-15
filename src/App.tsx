@@ -2,8 +2,9 @@ import type { ReactNode } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { AppShell } from './components/layout/AppShell'
-import { useAuth } from './context/AuthContext'
+import { useAuth } from './hooks/useAuth'
 import { AddSubscriptionPage } from './pages/AddSubscriptionPage'
+import { AddManualEntryPage } from './pages/AddManualEntryPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { ProfilePage } from './pages/ProfilePage'
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="subscriptions" element={<SubscriptionsPage />} />
           <Route path="subscriptions/new" element={<AddSubscriptionPage />} />
           <Route path="calendar" element={<CalendarPage />} />
+          <Route path="calendar/new" element={<AddManualEntryPage />} />
           <Route path="savings" element={<SavingsPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>

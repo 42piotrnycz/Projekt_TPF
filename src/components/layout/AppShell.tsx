@@ -9,7 +9,7 @@ import {
 } from '../icons/AppIcons'
 import { ROUTES } from '../../routes'
 import { auth } from '../../lib/firebase'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 import './AppShell.css'
 
 const navItems: {

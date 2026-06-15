@@ -39,7 +39,9 @@ export function SubscriptionRow({ subscription, onToggle }: SubscriptionRowProps
       <div className="sub-row__aside">
         <div className="sub-row__price">
           <span className="sub-row__amount">{formatCurrency(subscription.amount)}</span>
-          <span className="sub-row__cycle">Monthly</span>
+          <span className="sub-row__cycle">
+            {subscription.billingCycle === 'monthly' ? 'Monthly' : 'Yearly'}
+          </span>
         </div>
         <button
           type="button"

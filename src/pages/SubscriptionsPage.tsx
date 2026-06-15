@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { IconCheck, IconPause, IconPlus, IconWallet } from '../components/icons/AppIcons'
 import { SubscriptionRow } from '../components/subscriptions/SubscriptionRow'
 import { useSubscriptions } from '../hooks/useSubscriptions'
-import { CATEGORY_LABELS } from '../types/subscription'
+import { CATEGORY_LABELS, getSubscriptionMonthlyAmount } from '../types/subscription'
 import type { SubscriptionCategory } from '../types/subscription'
 import { ROUTES } from '../routes'
 import { formatCurrency } from '../utils/formatCurrency'
@@ -24,7 +24,7 @@ export function SubscriptionsPage() {
 
   const active = subscriptions.filter((s) => s.status === 'active')
   const paused = subscriptions.filter((s) => s.status === 'paused')
-  const monthlyTotal = active.reduce((sum, s) => sum + s.amount, 0)
+  const monthlyTotal = active.reduce((sum, s) => sum + getSubscriptionMonthlyAmount(s), 0)
 
   const filtered = useMemo(() => {
     let list = [...subscriptions]
@@ -34,7 +34,7 @@ export function SubscriptionsPage() {
     if (sort === 'renewal') {
       list.sort((a, b) => a.renewalDate.localeCompare(b.renewalDate))
     } else if (sort === 'amount') {
-      list.sort((a, b) => b.amount - a.amount)
+      list.sort((a, b) => getSubscriptionMonthlyAmount(b) - getSubscriptionMonthlyAmount(a))
     } else {
       list.sort((a, b) => a.name.localeCompare(b.name))
     }

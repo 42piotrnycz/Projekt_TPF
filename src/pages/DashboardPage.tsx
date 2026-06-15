@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import { IconArrowRight, IconBell } from '../components/icons/AppIcons'
-import { CATEGORY_COLORS, CATEGORY_LABELS } from '../types/subscription'
+import {
+  CATEGORY_COLORS,
+  CATEGORY_LABELS,
+  getSubscriptionMonthlyAmount,
+} from '../types/subscription'
 import type { Subscription } from '../types/subscription'
 import { ROUTES } from '../routes'
 import { daysUntil, formatRenewalLabel } from '../utils/dateLabels'
@@ -38,11 +42,13 @@ function TrialAlert({ subscription }: { subscription: Subscription }) {
 export function DashboardPage() {
   const { subscriptions } = useSubscriptions()
   const active = subscriptions.filter((s) => s.status === 'active')
-  const total = active.reduce((sum, s) => sum + s.amount, 0)
+  const total = active.reduce((sum, s) => sum + getSubscriptionMonthlyAmount(s), 0)
   const upcoming = getUpcoming(7)
   const topExpenses = getTopExpenses(3)
   const breakdown = getCategoryBreakdown()
-  const maxExpense = topExpenses[0]?.amount ?? 1
+  const maxExpense = topExpenses[0]
+    ? getSubscriptionMonthlyAmount(topExpenses[0])
+    : 1
   const trialSub = subscriptions.find((s) => s.trialEndsAt)
 
   return (
@@ -113,13 +119,13 @@ export function DashboardPage() {
               <li key={sub.id} className="dashboard__bar-item">
                 <div className="dashboard__bar-head">
                   <span>{sub.name}</span>
-                  <span>{formatCurrency(sub.amount)}</span>
+                  <span>{formatCurrency(getSubscriptionMonthlyAmount(sub))}/mo</span>
                 </div>
                 <div className="dashboard__bar-track">
                   <div
                     className="dashboard__bar-fill"
                     style={{
-                      width: `${(sub.amount / maxExpense) * 100}%`,
+                      width: `${(getSubscriptionMonthlyAmount(sub) / maxExpense) * 100}%`,
                       background: sub.iconColor,
                     }}
                   />

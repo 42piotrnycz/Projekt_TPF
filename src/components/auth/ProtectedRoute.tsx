@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { ROUTES } from '../../routes'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 
 export function ProtectedRoute() {
   const { user, loading } = useAuth()

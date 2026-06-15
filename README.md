@@ -132,6 +132,7 @@ Aplikacja: [http://localhost:3000](http://localhost:3000)
 | `/subscriptions` | Chroniony | Lista subskrypcji |
 | `/subscriptions/new` | Chroniony | Dodaj subskrypcję (formularz pełnostronicowy) |
 | `/calendar` | Chroniony | Kalendarz płatności + dodawanie inline |
+| `/calendar/new` | Chroniony | Dodaj jednorazowy wpis do kalendarza (formularz pełnostronicowy) |
 | `/savings` | Chroniony | Symulacja oszczędności |
 | `/profile` | Chroniony | Profil użytkownika |
 

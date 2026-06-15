@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#fff"/>
-  <rect x="0" y="0" width="1280" height="56" fill="#ff3c00"/>
-  <text x="24" y="36" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Hotjar  Surveys &amp; Feedback</text>
-  <rect x="900" y="200" width="320" height="220" rx="12" fill="#151b28"/>
-  <text x="1060" y="280" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">How was your experience?</text>
-  <text x="640" y="500" fill="#64748b" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">Ankieta satysfakcji w trakcie korzystania z aplikacji</text>
-</svg>

@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#fff"/>
-  <rect x="0" y="0" width="1280" height="56" fill="#ff3c00"/>
-  <text x="24" y="36" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Hotjar  Recordings</text>
-  <rect x="40" y="90" width="380" height="560" rx="8" fill="#f1f5f9"/>
-  <rect x="450" y="90" width="790" height="560" rx="8" fill="#0a0e17"/>
-  <text x="640" y="380" fill="#94a3b8" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">Nagranie sesji u|ytkownika</text>
-</svg>

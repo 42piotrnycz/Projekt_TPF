@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
-  <rect width="1280" height="720" fill="#fff"/>
-  <rect x="0" y="0" width="1280" height="56" fill="#ff3c00"/>
-  <text x="24" y="36" fill="#fff" font-family="Arial, sans-serif" font-size="20" font-weight="bold">Hotjar  Heatmap</text>
-  <rect x="200" y="100" width="880" height="520" rx="8" fill="#0a0e17" opacity="0.9"/>
-  <circle cx="500" cy="300" r="80" fill="#ef4444" opacity="0.5"/>
-  <circle cx="700" cy="350" r="50" fill="#f97316" opacity="0.5"/>
-  <text x="640" y="660" fill="#64748b" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">Mapa klikni na widoku Dashboard</text>
-</svg>

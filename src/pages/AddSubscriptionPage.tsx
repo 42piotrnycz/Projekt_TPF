@@ -1,4 +1,3 @@
-import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthTextField } from '../components/auth/AuthTextField'
 import { IconArrowLeft, IconCalendar, IconPlus } from '../components/icons/AppIcons'

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { AnalyticsListener } from './components/AnalyticsListener'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
 import { AppShell } from './components/layout/AppShell'
 import { useAuth } from './hooks/useAuth'
@@ -24,6 +25,8 @@ function PublicOnly({ children }: { children: ReactNode }) {
 
 export default function App() {
   return (
+    <>
+    <AnalyticsListener />
     <Routes>
       <Route
         path={ROUTES.welcome}
@@ -63,5 +66,6 @@ export default function App() {
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.welcome} replace />} />
     </Routes>
+    </>
   )
 }

@@ -18,12 +18,12 @@ const navItems: {
   icon: typeof IconHome
   disabled?: boolean
 }[] = [
-  { to: ROUTES.dashboard, label: 'Home', icon: IconHome },
-  { to: ROUTES.subscriptions, label: 'Subscriptions', icon: IconLayers },
-  { to: ROUTES.calendar, label: 'Calendar', icon: IconCalendar },
-  { to: ROUTES.savings, label: 'Savings', icon: IconPiggy },
-  { to: ROUTES.profile, label: 'Profile', icon: IconUser },
-]
+    { to: ROUTES.dashboard, label: 'Home', icon: IconHome },
+    { to: ROUTES.subscriptions, label: 'Subscriptions', icon: IconLayers },
+    { to: ROUTES.calendar, label: 'Calendar', icon: IconCalendar },
+    { to: ROUTES.savings, label: 'Savings', icon: IconPiggy },
+    { to: ROUTES.profile, label: 'Profile', icon: IconUser },
+  ]
 
 export function AppShell() {
   const navigate = useNavigate()

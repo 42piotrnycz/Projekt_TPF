@@ -19,7 +19,7 @@
 /* ── Body layout ───────────────────────────────────── */
 .cal-page__body {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 320px;
   gap: var(--spacing-md);
   align-items: start;
 }
@@ -121,6 +121,40 @@
 .cal-page__cell--empty {
   cursor: default;
   pointer-events: none;
+}
+
+.cal-page__cell-add {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: #fff;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.cal-page__cell-add svg {
+  width: 12px;
+  height: 12px;
+}
+
+.cal-page__cell:hover .cal-page__cell-add,
+.cal-page__cell:focus-within .cal-page__cell-add,
+.cal-page__cell--selected .cal-page__cell-add {
+  opacity: 1;
+}
+
+.cal-page__cell-add:hover {
+  transform: scale(1.08);
 }
 
 .cal-page__cell--selected {
@@ -291,6 +325,23 @@
 .cal-page__manage-btn {
   width: 100%;
   justify-content: center;
+}
+
+.cal-page__add-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.cal-page__add-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.cal-page__add-hint {
+  margin: calc(var(--spacing-xs) * -1) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
 }
 
 .cal-page__manage-btn svg {

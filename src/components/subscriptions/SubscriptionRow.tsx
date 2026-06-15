@@ -31,7 +31,10 @@ export function SubscriptionRow({ subscription, onToggle }: SubscriptionRowProps
             </span>
           </div>
           <p className="sub-row__meta">
-            {CATEGORY_LABELS[subscription.category]} • Renews {formatRenewalDate(subscription.renewalDate)}
+            {CATEGORY_LABELS[subscription.category]}
+            {subscription.recurring ? ' • Recurring' : ''}
+            {' • Renews '}
+            {formatRenewalDate(subscription.renewalDate)}
           </p>
         </div>
       </div>

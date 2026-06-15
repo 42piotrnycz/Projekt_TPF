@@ -1,0 +1,63 @@
+.add-sub__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-stack-gap);
+  max-width: 480px;
+}
+
+.add-sub__form--compact {
+  max-width: none;
+}
+
+.add-sub__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.add-sub__actions .add-sub__submit {
+  margin-top: 0;
+}
+
+.add-sub__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--field-stack-gap);
+}
+
+.add-sub__select {
+  min-height: var(--control-height);
+  padding: 0 var(--control-padding-x);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-input);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-md);
+}
+
+.add-sub__select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.add-sub__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.add-sub__checkbox input {
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  accent-color: var(--color-accent);
+}
+
+.add-sub__submit {
+  align-self: flex-start;
+}

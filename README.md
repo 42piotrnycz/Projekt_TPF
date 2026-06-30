@@ -232,6 +232,18 @@ Monitorowanie aktywnych użytkowników na żywo po publikacji aplikacji.
 
 ---
 
+## Hotjar
+
+Aplikacja jest zintegrowana z **Hotjar** w celu prowadzenia badań UX po wdrożeniu produkcyjnym. Hotjar umożliwia zbieranie heatmap kliknięć i przewijania, nagrań sesji użytkowników oraz ankiet bezpośrednio w aplikacji.
+
+### Panel Hotjar
+
+![Hotjar](./docs/screenshots/app/hotjar.png)
+
+Widok panelu Hotjar z aktywnymi narzędziami badawczymi powiązanymi z domeną aplikacji SaveMammona.
+
+---
+
 ## Komendy npm
 
 | Komenda | Opis |
